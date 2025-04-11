@@ -1480,6 +1480,10 @@ void DrawPin(ImNodesEditorContext& editor, const int pin_idx)
     const ImRect& parent_node_rect = editor.Nodes.Pool[pin.ParentNodeIdx].Rect;
 
     pin.Pos = GetScreenSpacePinCoordinates(parent_node_rect, pin.AttributeRect, pin.Type);
+    if (pin.Type == ImNodesAttributeType_Input)
+        pin.Pos.x += pin.AttributeRect.GetWidth();
+    else if (pin.Type == ImNodesAttributeType_Output)
+        pin.Pos.x -= pin.AttributeRect.GetWidth();
 
     ImU32 pin_color = pin.ColorStyle.Background;
 
